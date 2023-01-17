@@ -9,39 +9,45 @@ namespace CatWorx.BadgeMaker
 {
     class Program
     {
-        static List<string> GetEmployees()
+        static List<Employee> GetEmployees()
         {
-            List<string> employees = new List<string>();
+            List<Employee> employees = new List<Employee>();
             // Collect user values until the value is an empty string
             while (true)
             {
                 Console.WriteLine("Please enter a name: (leave empty to exit): ");
-                string input = Console.ReadLine() ?? "";
+
+                string firstName = Console.ReadLine() ?? "";
                 // Break if the user hits ENTER without typing a name
-                if (input == "")
+                if (firstName == "")
                 {
                     break;
                 }
 
-                // example
-                // Employee currentEmployee = new Employee("Vince", "McMahon", 123, "https://placekitten.com/300/300");
-                Employee currentEmployee = new Employee(input, "Smith");
-                employees.Add(currentEmployee.GetFullName());
+                // add a Console.ReadLine() for each value
+                Console.Write("Enter last name: ");
+                string lastName = Console.ReadLine() ?? "";
+                Console.Write("Enter ID: ");
+                int id = Int32.Parse(Console.ReadLine() ?? "");
+                Console.Write("Enter Photo URL:");
+                string photoUrl = Console.ReadLine() ?? "";
+                Employee currentEmployee = new Employee(firstName, lastName, id, photoUrl);
+                employees.Add(currentEmployee);
             }
             return employees;
         }
 
-        static void PrintEmployees(List<string> employees)
+        static void PrintEmployees(List<Employee> employees)
         {
             for (int i = 0; i < employees.Count; i++)
             {
-                Console.WriteLine(employees[i]);
+                Console.WriteLine(employees[i].GetFullName());
             }
         }
 
         static void Main(string[] args)
         {
-            List<string> employees = GetEmployees();
+            List<Employee> employees = GetEmployees();
             PrintEmployees(employees);
         }
     }
