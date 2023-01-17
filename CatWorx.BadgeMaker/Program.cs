@@ -23,6 +23,8 @@ namespace CatWorx.BadgeMaker
                     break;
                 }
 
+                // example
+                // Employee currentEmployee = new Employee("Vince", "McMahon", 123, "https://placekitten.com/300/300");
                 Employee currentEmployee = new Employee();
                 currentEmployee.FirstName = input;
                 employees.Add(input);
