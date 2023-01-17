@@ -16,7 +16,7 @@ namespace CatWorx.BadgeMaker
             LastName = lastName;
         }
 
-        public string GetName()
+        public string GetFullName()
         {
             return FirstName + " " + LastName;
         }
