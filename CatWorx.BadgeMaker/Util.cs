@@ -71,14 +71,16 @@ namespace CatWorx.BadgeMaker
             int PHOTO_BOTTOM_Y = 517;
 
             int COMPANY_NAME_Y = 150;
+
+            int EMPLOYEE_NAME_Y = 600;
+
+            int EMPLOYEE_ID_Y = 730;
             // text SKPaint object properties
             SKPaint paint = new SKPaint();
             paint.TextSize = 42.0f;
             paint.IsAntialias = true;
-            paint.Color = SKColors.White;
             paint.IsStroke = false;
             paint.TextAlign = SKTextAlign.Center;
-            paint.Typeface = SKTypeface.FromFamilyName("Arial");
 
             using (HttpClient client = new HttpClient())
             {
@@ -99,18 +101,36 @@ namespace CatWorx.BadgeMaker
                         new SKRect(PHOTO_LEFT_X, PHOTO_TOP_Y, PHOTO_RIGHT_X, PHOTO_BOTTOM_Y)
                     );
 
-                    // Draw employee text info
                     // Company name
+                    paint.Color = SKColors.White;
+                    paint.Typeface = SKTypeface.FromFamilyName("Arial");
                     canvas.DrawText(
                         employees[i].GetCompanyName(),
-                        (BADGE_WIDTH / 2f),
+                        BADGE_WIDTH / 2f,
                         COMPANY_NAME_Y,
+                        paint
+                    );
+                    // Employee name
+                    paint.Color = SKColors.Black;
+                    canvas.DrawText(
+                        employees[i].GetFullName(),
+                        BADGE_WIDTH / 2f,
+                        EMPLOYEE_NAME_Y,
+                        paint
+                    );
+                    // Employee ID
+                    paint.Typeface = SKTypeface.FromFamilyName("Courier New");
+                    canvas.DrawText(
+                        employees[i].GetId().ToString(),
+                        BADGE_WIDTH / 2f,
+                        EMPLOYEE_ID_Y,
                         paint
                     );
 
                     SKImage finalImage = SKImage.FromBitmap(badge);
                     SKData data = finalImage.Encode();
-                    data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
+                    string template = "data/{0}_badge.png";
+                    data.SaveTo(File.OpenWrite(String.Format(template, employees[i].GetId())));
                 }
             }
         }
