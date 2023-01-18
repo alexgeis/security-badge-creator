@@ -61,7 +61,7 @@ namespace CatWorx.BadgeMaker
 
         async public static Task MakeBadges(List<Employee> employees)
         {
-            // Layout variables
+            // LAYOUT VARIABLES
             int BADGE_WIDTH = 669;
             int BADGE_HEIGHT = 1044;
 
@@ -69,6 +69,16 @@ namespace CatWorx.BadgeMaker
             int PHOTO_TOP_Y = 215;
             int PHOTO_RIGHT_X = 486;
             int PHOTO_BOTTOM_Y = 517;
+
+            int COMPANY_NAME_Y = 150;
+            // text SKPaint object properties
+            SKPaint paint = new SKPaint();
+            paint.TextSize = 42.0f;
+            paint.IsAntialias = true;
+            paint.Color = SKColors.White;
+            paint.IsStroke = false;
+            paint.TextAlign = SKTextAlign.Center;
+            paint.Typeface = SKTypeface.FromFamilyName("Arial");
 
             using (HttpClient client = new HttpClient())
             {
@@ -82,10 +92,20 @@ namespace CatWorx.BadgeMaker
                     SKBitmap badge = new SKBitmap(BADGE_WIDTH, BADGE_HEIGHT);
                     SKCanvas canvas = new SKCanvas(badge);
 
+                    // Draw employee image
                     canvas.DrawImage(background, new SKRect(0, 0, BADGE_WIDTH, BADGE_HEIGHT));
                     canvas.DrawImage(
                         photo,
                         new SKRect(PHOTO_LEFT_X, PHOTO_TOP_Y, PHOTO_RIGHT_X, PHOTO_BOTTOM_Y)
+                    );
+
+                    // Draw employee text info
+                    // Company name
+                    canvas.DrawText(
+                        employees[i].GetCompanyName(),
+                        (BADGE_WIDTH / 2f),
+                        COMPANY_NAME_Y,
+                        paint
                     );
 
                     SKImage finalImage = SKImage.FromBitmap(badge);
