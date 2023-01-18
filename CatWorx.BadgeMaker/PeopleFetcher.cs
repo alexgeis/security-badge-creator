@@ -45,7 +45,13 @@ namespace CatWorx.BadgeMaker
                 string response = await client.GetStringAsync(
                     "https://randomuser.me/api/?results=10&nat=us&inc=name,id,picture"
                 );
-                Console.WriteLine(response);
+                JObject json = JObject.Parse(response);
+                JToken results = json.SelectToken("results") ?? "";
+
+                foreach (var employee in results)
+                {
+                    Console.WriteLine(employee.SelectToken("name.first"));
+                }
             }
 
             return employees;
