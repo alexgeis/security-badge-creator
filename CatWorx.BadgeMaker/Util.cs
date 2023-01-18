@@ -134,5 +134,25 @@ namespace CatWorx.BadgeMaker
                 }
             }
         }
+
+        public static bool ChooseGetMethod()
+        {
+            bool getMethodAPI = false;
+
+            while (true)
+            {
+                Console.WriteLine("Would you like to enter data manually? ( Y / N )");
+                string response = Console.ReadLine() ?? "";
+
+                if (response == "Y" || response == "y")
+                {
+                    break;
+                }
+                getMethodAPI = true;
+                break;
+            }
+
+            return getMethodAPI;
+        }
     }
 }
