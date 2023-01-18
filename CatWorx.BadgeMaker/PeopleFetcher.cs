@@ -46,11 +46,16 @@ namespace CatWorx.BadgeMaker
                     "https://randomuser.me/api/?results=10&nat=us&inc=name,id,picture"
                 );
                 JObject json = JObject.Parse(response);
-                JToken results = json.SelectToken("results") ?? "";
-
-                foreach (var employee in results)
+                foreach (JToken token in json.SelectToken("results")!)
                 {
-                    Console.WriteLine(employee.SelectToken("name.first"));
+                    // Parse JSON data
+                    Employee emp = new Employee(
+                        token.SelectToken("name.first")!.ToString(),
+                        token.SelectToken("name.last")!.ToString(),
+                        Int32.Parse(token.SelectToken("id.value")!.ToString().Replace("-", "")),
+                        token.SelectToken("picture.large")!.ToString()
+                    );
+                    employees.Add(emp);
                 }
             }
 
