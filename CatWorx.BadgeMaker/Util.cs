@@ -21,5 +21,10 @@ namespace CatWorx.BadgeMaker
                 );
             }
         }
+
+        public static void MakeCSV(List<Employee> employees)
+        {
+            // code here
+        }
     }
 }
