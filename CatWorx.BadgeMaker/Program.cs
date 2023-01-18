@@ -41,6 +41,7 @@ namespace CatWorx.BadgeMaker
         {
             for (int i = 0; i < employees.Count; i++)
             {
+                // 2nd arg = padding, e.g. -10 = left-aligned 10 space pad
                 string template = "{0,-10}\t{1,-20}\t{2}";
                 Console.WriteLine(
                     String.Format(
