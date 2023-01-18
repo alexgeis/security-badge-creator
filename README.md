@@ -1,5 +1,3 @@
-Search and replace keywords: `deployed_link`, `product-screenshot`, `security-badge-creator`, `project_title`, `project_description`
-
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
@@ -120,7 +118,7 @@ First, install the .NET environment version 6+.
 
 ## Usage
 
-Simply follow the CLI prompts to add employee info and you'll find created badges in the ./data/ folder as .png assets.
+Simply follow the CLI prompts to add employee info and you'll find created badges in the CatWorx.BadgeMaker/data/ directory as .png assets.
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
